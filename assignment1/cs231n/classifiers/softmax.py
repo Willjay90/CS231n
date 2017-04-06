@@ -44,12 +44,12 @@ def softmax_loss_naive(W, X, y, reg):
     # dW is adjusted by each row being the X[i] pixel values by the probability vector
     for j in range(num_classes):
       dW[:,j] += X[i,:] * probabilities[j]
-            
+
   # Right now the loss is a sum over all training examples, but we want it
   # to be an average instead so we divide by num_train.
   loss /= num_train
   dW /= num_train
-                    
+
   # Add regularization to the loss.
   loss += 0.5 * reg * np.sum(W * W)
   dW += reg * W
@@ -89,7 +89,7 @@ def softmax_loss_vectorized(W, X, y, reg):
   # to be an average instead so we divide by num_train.
   loss /= num_train
   dW /= num_train
-        
+
   # Add regularization to the loss.
   loss += 0.5 * reg * np.sum(W * W)
   dW += reg * W
@@ -98,4 +98,3 @@ def softmax_loss_vectorized(W, X, y, reg):
   #############################################################################
 
   return loss, dW
-
