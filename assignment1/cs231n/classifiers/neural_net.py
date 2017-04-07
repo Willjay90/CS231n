@@ -156,6 +156,7 @@ class TwoLayerNet(object):
     """
     num_train = X.shape[0]
     iterations_per_epoch = max(num_train / batch_size, 1)
+    replace = False if (iterations_per_epoch > 1) else True
 
     # Use SGD to optimize the parameters in self.model
     loss_history = []
@@ -170,7 +171,8 @@ class TwoLayerNet(object):
       # TODO: Create a random minibatch of training data and labels, storing  #
       # them in X_batch and y_batch respectively.                             #
       #########################################################################
-      batch_indicies = np.random.choice(num_train, batch_size, replace=False)
+
+      batch_indicies = np.random.choice(num_train, batch_size, replace=replace)
       X_batch = X[batch_indicies]
       y_batch = y[batch_indicies]
       #########################################################################
@@ -203,7 +205,6 @@ class TwoLayerNet(object):
         val_acc = (self.predict(X_val) == y_val).mean()
         train_acc_history.append(train_acc)
         val_acc_history.append(val_acc)
-
         # Decay learning rate
         learning_rate *= learning_rate_decay
 
