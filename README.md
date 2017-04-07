@@ -12,6 +12,6 @@ Assignment 1:
 + Q2: Training a Support Vector Machine (Finished)
 + Q3: Implement a Softmax classifier
 + Q4: Two-Layer Neural Network
-- Q5: Higher Level Representations: Image Features
++ Q5: Higher Level Representations: Image Features
 ```
 
