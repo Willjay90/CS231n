@@ -1,5 +1,6 @@
 import numpy as np
 from random import shuffle
+from past.builtins import xrange
 
 def softmax_loss_naive(W, X, y, reg):
   """
@@ -31,29 +32,28 @@ def softmax_loss_naive(W, X, y, reg):
   #############################################################################
   num_classes = W.shape[1]
   num_train = X.shape[0]
+
   for i in range(num_train):
-    scores = X[i].dot(W) # this is the prediction of training sample i, for each class
-    scores -= np.max(scores)
-    # calculate the probabilities that the sample belongs to each class
-    probabilities = np.exp(scores) / np.sum(np.exp(scores))
-    # loss is the log of the probability of the correct class
-    loss += -np.log(probabilities[y[i]])
+      scores = X[i].dot(W)
+      scores -= np.max(scores) # get rid of numeric instability
+      # calculate the probabilities that the sample belongs to each class
+      probabilities = np.exp(scores) / np.sum(np.exp(scores))
+      # loss is the log of the probability of the correct class
+      loss += -np.log(probabilities[y[i]]) # Li = −log(e^f(yi)/ ∑ e^f(j))
 
-    probabilities[y[i]] -= 1 # calculate p-1 and later we'll put the negative back
+      probabilities[y[i]] -= 1 # Li = −f(yi) + log ∑ e^f(j)
 
-    # dW is adjusted by each row being the X[i] pixel values by the probability vector
-    for j in range(num_classes):
-      dW[:,j] += X[i,:] * probabilities[j]
-
+      # dW is adjusted by each row being the X[i] pixel values by the probability vector
+      for j in range(num_classes):
+          dW[:,j] += X[i,:] * probabilities[j]
   # Right now the loss is a sum over all training examples, but we want it
   # to be an average instead so we divide by num_train.
   loss /= num_train
   dW /= num_train
 
   # Add regularization to the loss.
-  loss += 0.5 * reg * np.sum(W * W)
-  dW += reg * W
-
+  loss += reg * np.sum(W * W)
+  dW += 2 * reg * W
 
   #############################################################################
   #                          END OF YOUR CODE                                 #
@@ -85,14 +85,16 @@ def softmax_loss_vectorized(W, X, y, reg):
 
   probabilities[np.arange(probabilities.shape[0]), y] -= 1
   dW += X.T.dot(probabilities)
+
   # Right now the loss is a sum over all training examples, but we want it
   # to be an average instead so we divide by num_train.
   loss /= num_train
   dW /= num_train
 
   # Add regularization to the loss.
-  loss += 0.5 * reg * np.sum(W * W)
-  dW += reg * W
+  loss += reg * np.sum(W * W)
+  dW += 2 * reg * W
+
   #############################################################################
   #                          END OF YOUR CODE                                 #
   #############################################################################
