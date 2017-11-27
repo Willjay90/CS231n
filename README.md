@@ -11,13 +11,15 @@ Also, you will be working in either [TensorFlow](https://www.tensorflow.org/) or
 
 The datasets in assginment 3 is pretty large. Try Download youself. (get_assignment3_data.sh)
 
-Still incomplete ..
 ✅Q1: Image Captioning with Vanilla RNNs
+
 ✅Q2: Image Captioning with LSTMs
-✅Q3: Network Visualization: Saliency maps, Class Visualization, and
-Fooling Images
-✍️Q4: Style Transfer
-✍️Q5: Generative Adversarial Networks
+
+✅Q3: Network Visualization: Saliency maps, Class Visualization, and Fooling Images
+
+✅Q4: Style Transfer
+
+✅Q5: Generative Adversarial Networks
 
 ---
 Material: http://cs231n.github.io/
